@@ -1,0 +1,5 @@
+export const MAX_KILOMETERS_DISTANCE = 200
+export const MAX_MILE_DISTANCE = 100
+export const DEFAULT_DISTANCE_PREFERNCE = 10
+export const DEFAULT_MIN_AGE = 18
+export const DEFAULT_MAX_AGE = 25
