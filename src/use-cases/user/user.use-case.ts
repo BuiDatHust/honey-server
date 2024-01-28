@@ -177,7 +177,7 @@ export class UserUsecase {
       async (id: string) => !this.iInmemoryDataService.checkExistCuckooFilter(key, id),
     )
 
-    let recommedUserIds = ['65b3bff5add125eac182cb1e', '65b671442a1c4612ca7ff155', '65b67a90f34310451094cd36']
+    let recommedUserIds = ['65b3bff5add125eac182cb1e', '65b671442a1c4612ca7ff155', '65b67a90f34310451094cd36', '65b6cc8b20564cc361abab1f']
     // try {
     //   recommedUserIds = await this.rpcClientService.getListRecommendProfile(user_id, ids, limit)
     // } catch (error) {
