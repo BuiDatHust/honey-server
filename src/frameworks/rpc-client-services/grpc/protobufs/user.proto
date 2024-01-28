@@ -1,0 +1,33 @@
+syntax = "proto3";
+package api;
+ 
+service User {
+  rpc getListRecommendUser (GetListRecommendUserRequest) returns (GetListRecommendUserResponse) {}
+  rpc createUser (CreateUserRequest) returns (CreateUserResponse) {}
+}
+
+message GetListRecommendUserRequest {
+  string id = 1;
+  repeated string ids =2;
+  int32 limit=3;
+}
+
+message GetListRecommendUserResponse {
+  repeated string ids=1;
+}
+
+message CreateUserRequest {
+  string id=1;
+  string sexual_orientation=2;
+  string relationship_goal=3;
+  repeated string passions=4;
+  string pets=5;
+  string workout=6;
+  string smoking=7;
+  string sleeping_habit=8;
+  uint32 score=9;
+}
+
+message CreateUserResponse {
+  bool is_success=1;
+}

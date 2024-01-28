@@ -1,0 +1,23 @@
+syntax = "proto3";
+package scheduler;
+ 
+service SchedulerService {
+  rpc speedUpMatchMaking (SpeedUpMatchMakingRequest) returns (SpeedUpMatchMakingResponse) {}
+}
+
+
+enum TypeMatchMaking {
+  RANDOM_CHAT=0;
+  RANDOM_VOICE_CALL=1;  
+}
+
+message SpeedUpMatchMakingRequest {
+  string user_id = 1;
+  int32 speed_up_level =2;
+  string match_making_request_id=3;
+  TypeMatchMaking type_match_making=4;
+}
+
+message SpeedUpMatchMakingResponse {
+  bool status = 1;
+}

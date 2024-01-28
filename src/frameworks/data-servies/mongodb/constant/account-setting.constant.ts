@@ -1,0 +1,4 @@
+export enum UNIT_DISTANCE {
+  KILOMETERS = 'KILOMETERS',
+  MILE = 'MILE',
+}

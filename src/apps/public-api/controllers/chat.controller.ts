@@ -1,0 +1,52 @@
+import { ILoggerService } from '@core/abstracts/logger-services.abstract'
+import { CurrentUser } from '@decorators/current-user.decorator'
+import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common'
+import { ApiTags } from '@nestjs/swagger'
+import { ChatUsecase } from '@use-cases/chat/chat.use-case'
+import { GetListChatRequestDto } from '@use-cases/chat/dto/get-list-chat-request.dto'
+import { TCURRENT_USER_CONTEXT_TYPE } from '@use-cases/user/constant/user.constant'
+import { HttpBaseResponse } from 'src/http/http-base.response'
+import { PaginationResponse } from 'src/http/paginate-cursor.response'
+
+@ApiTags('chat')
+@Controller('chat')
+export class ChatController {
+  constructor(
+    private readonly logger: ILoggerService,
+    private readonly chatUsecase: ChatUsecase,
+  ) {}
+
+  @Get('list')
+  public async list(
+    @CurrentUser() user: TCURRENT_USER_CONTEXT_TYPE,
+    @Query() query: GetListChatRequestDto,
+  ) {
+    this.logger.info({}, 'list')
+
+    const DEFAULT_LIST = 20
+    const MAX_PAGINATE_PAGE = 30
+    const MIN_PAGINATE_PAGE = 1
+    const limit = query.limit || DEFAULT_LIST
+    if (limit > MAX_PAGINATE_PAGE || limit < MIN_PAGINATE_PAGE) {
+      throw new BadRequestException()
+    }
+
+    const result = await this.chatUsecase.getAllChat(user.user_id, {
+      cursor: query.cursor,
+      limit,
+      order: {},
+    })
+    return new PaginationResponse(result.data, {
+      has_more: result.has_more,
+      next_cursor: result?.next_cursor,
+    })
+  }
+
+  @Get(':id')
+  public async info(@CurrentUser() user: TCURRENT_USER_CONTEXT_TYPE, @Param('id') id: string) {
+    this.logger.info({}, 'info')
+
+    const result = await this.chatUsecase.getChatSetting(user.user_id, id)
+    return new HttpBaseResponse(result)
+  }
+}

@@ -1,0 +1,19 @@
+export enum TYPE_REACTION {
+  LIKE = 'LIKE',
+  LOVE = 'LOVE',
+  ANGRY = 'ANGRY',
+  HAHA = 'HAHA',
+}
+
+export enum TYPE_CONTENT {
+  TEXT = 'TEXT',
+  IMAGE = 'IMAGE',
+  AUDIO = 'AUDIO',
+  VIDEO = 'VIDEO',
+  MEETING_RECORD = 'MEETING_RECORD',
+}
+
+export enum TYPE_MESSAGE {
+  PRIVATE = 'PRIVATE',
+  RANDOM = 'RANDOM',
+}

@@ -1,0 +1,36 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/use-cases/user/user.use-case.ts",
+            "preLaunchTask": "tsc: build - tsconfig.json",
+            "outFiles": [
+                "${workspaceFolder}/dist/**/*.js"
+            ]
+        },
+        {
+            "command": "yarn start:debug public-api",
+            "name": "Debug public api",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "yarn start:debug scheduler",
+            "name": "Debug scheduler",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "command": "yarn start:debug match-making-worker",
+            "name": "Debug match-making-worker",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+    ]
+}

@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  es-checkin-api:
+    container_name: es-checkin-api
+    build:
+      context: ../..
+      dockerfile: ./docker/Dockerfile
+    command: node /app/apps/checkin-api/apps/checkin-api/src/main.js
+    # command: pnpm start:dev checkin-api
+    networks:
+      - acheckin_es
+    ports:
+      - '3333:3000'
+    env_file:
+      - ../../.env
+    # environment:
+    #   - KAFKA_URI=kafka:9092
+
+  es-checkin-grpc:
+    container_name: es-checkin-grpc
+    build:
+      context: ../..
+      dockerfile: ./docker/Dockerfile
+    command: node /app/apps/checkin-grpc/apps/checkin-grpc/src/main.js
+    # command: pnpm start:dev checkin-grpc
+    networks:
+      - acheckin_es
+    env_file:
+      - ../../.env
+    # environment:
+    #   - KAFKA_URI=kafka:9092
+
+  es-worker:
+    container_name: es-worker
+    build:
+      context: ../..
+      dockerfile: ./docker/Dockerfile
+    command: node /app/apps/worker/apps/worker/src/main.js
+    # command: pnpm start:dev worker
+    networks:
+      - acheckin_es
+    env_file:
+      - ../../.env
+
+networks:
+  acheckin_es:
+    name: acheckin_es
+    external: true

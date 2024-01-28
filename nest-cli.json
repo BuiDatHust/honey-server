@@ -1,0 +1,6 @@
+{
+  "compilerOptions": {
+    "assets": ["**/*.proto", "**/.handlebars", "**/.json"],
+    "watchAssets": true
+  }
+}
